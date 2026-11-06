@@ -60,7 +60,65 @@ export function validateTraceability(uxDir) {
     }
   }
 
-  return { ok: problems.length === 0, problems, stories };
+  const features = validateFeatures(uxDir, stories, problems);
+
+  return { ok: problems.length === 0, problems, stories, features };
+}
+
+function validateFeatures(uxDir, stories, problems) {
+  const featuresDir = join(uxDir, 'features');
+  if (!existsSync(featuresDir)) return {};
+  const features = {};
+
+  for (const file of readdirSync(featuresDir).filter((f) => /^FEAT-.*\.md$/.test(f))) {
+    const { fields } = parseFrontmatter(readFileSync(join(featuresDir, file), 'utf8'));
+    const id = fields?.id;
+    if (!id || !/^FEAT-\d{3,}$/.test(id)) {
+      problems.push(`${file}: missing or invalid feature id`);
+      continue;
+    }
+    if (features[id]) problems.push(`${id}: duplicate feature id`);
+    features[id] = {
+      status: fields.status ?? 'proposed',
+      stories: Array.isArray(fields.stories) ? fields.stories : [],
+      screens: Array.isArray(fields.screens) ? fields.screens : [],
+      intersects: Array.isArray(fields.intersects) ? fields.intersects : [],
+    };
+  }
+
+  for (const [id, f] of Object.entries(features)) {
+    for (const ref of f.stories) {
+      if (!stories[ref]) problems.push(`${id}: dangling story reference ${ref}`);
+    }
+    for (const ref of f.screens) {
+      if (!existsSync(join(uxDir, 'prototypes', ref + '.html'))) {
+        problems.push(`${id}: dangling screen reference ${ref}`);
+      }
+    }
+    for (const ref of f.intersects) {
+      if (!features[ref]) problems.push(`${id}: dangling intersection reference ${ref}`);
+      else if (!features[ref].intersects.includes(id)) {
+        problems.push(`${id}: intersection with ${ref} not mutual — add ${id} to ${ref}.intersects`);
+      }
+    }
+    if (f.status === 'approved' && f.stories.length === 0) {
+      problems.push(`${id}: status "approved" but no stories — decomposition gate failed`);
+    }
+  }
+
+  const entries = Object.entries(features);
+  for (let i = 0; i < entries.length; i++) {
+    for (let j = i + 1; j < entries.length; j++) {
+      const [aId, a] = entries[i];
+      const [bId, b] = entries[j];
+      const shared = a.screens.filter((s) => b.screens.includes(s));
+      if (shared.length && !(a.intersects.includes(bId) && b.intersects.includes(aId))) {
+        problems.push(`${aId}/${bId}: share ${shared.join(', ')} but intersection is not declared on both`);
+      }
+    }
+  }
+
+  return features;
 }
 
 if (process.argv[1] && basename(process.argv[1]) === 'validate-traceability.mjs') {
