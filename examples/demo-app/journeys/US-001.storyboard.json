@@ -1,0 +1,51 @@
+{
+  "storyId": "US-001",
+  "title": "Create a project",
+  "baseUrl": "http://localhost:4173",
+  "scenes": [
+    {
+      "id": "SC-01",
+      "title": "Empty projects list",
+      "screenId": "SCR-001",
+      "narration": "Перед нами ТимБорд — список проектов. Пока он пуст, и интерфейс сразу объясняет, с чего начать.",
+      "minHoldSec": 2,
+      "actions": [
+        { "type": "goto", "url": "/" },
+        { "type": "expect-visible", "selector": "testid=projects-empty" }
+      ]
+    },
+    {
+      "id": "SC-02",
+      "title": "Open the create form",
+      "screenId": "SCR-002",
+      "narration": "Создаём первый проект. Всё, что нужно указать — название.",
+      "actions": [
+        { "type": "click", "selector": "testid=empty-create" },
+        { "type": "expect-visible", "selector": "testid=project-name" }
+      ]
+    },
+    {
+      "id": "SC-03",
+      "title": "Empty name is rejected",
+      "screenId": "SCR-002",
+      "narration": "Если отправить форму без названия, ничего не ломается. Поле остаётся на месте, а подсказка объясняет, зачем название нужно.",
+      "actions": [
+        { "type": "click", "selector": "testid=create-submit" },
+        { "type": "expect-text", "selector": "testid=create-error", "text": "Укажите название проекта" }
+      ]
+    },
+    {
+      "id": "SC-04",
+      "title": "Project created",
+      "screenId": "SCR-003",
+      "narration": "Называем проект «Альфа» и сохраняем. Проект создан, и интерфейс сразу предлагает следующий полезный шаг — пригласить коллег.",
+      "minHoldSec": 2,
+      "actions": [
+        { "type": "fill", "selector": "testid=project-name", "value": "Альфа", "delayMs": 60 },
+        { "type": "click", "selector": "testid=create-submit" },
+        { "type": "expect-text", "selector": "testid=project-title", "text": "Альфа" },
+        { "type": "expect-visible", "selector": "testid=created-note" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"><title>SCR-003 — Project page</title>
+<style>
+  * { font-family:system-ui,sans-serif; box-sizing:border-box; }
+  body { margin:0; background:#f9fafb; color:#1a1a1a; }
+  main { max-width:720px; margin:24px auto; padding:0 24px; }
+  .wire { border:1px dashed #d1d5db; border-radius:8px; padding:16px; background:#fff; }
+  button { padding:8px 16px; border:1px solid #2563eb; border-radius:6px; background:#2563eb; color:#fff; cursor:pointer; }
+  input { padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; width:100%; }
+  .error { color:#b91c1c; font-size:13px; }
+  .success { color:#047857; }
+  .badge { font-size:12px; padding:2px 8px; border-radius:10px; background:#eef2ff; }
+  [hidden] { display:none !important; }
+  .state-bar { position:fixed; bottom:0; left:0; right:0; display:flex; gap:8px; padding:8px 24px; background:#111; }
+  .state-bar button { background:#333; border-color:#333; font-size:12px; }
+</style></head>
+<body data-screen="SCR-003" data-story="US-002">
+<main>
+  <a href="SCR-001.html" data-testid="back-to-projects-2">← К проектам</a>
+  <h1>Альфа</h1>
+  <p class="success" data-testid="created-note" role="status">Проект создан. Теперь пригласите коллег.</p>
+  <div class="wire">
+    <h2>Участники <button data-testid="invite-open" onclick="setState('form')">Пригласить</button></h2>
+    <ul data-testid="members-list"><li>you@example.com — <span class="badge">владелец</span></li></ul>
+
+    <section data-state="default" hidden></section>
+    <section data-state="form" hidden>
+      <label for="e">E-mail коллеги</label>
+      <input id="e" data-testid="invite-email">
+      <p><button data-testid="invite-submit" onclick="setState('success')">Отправить приглашение</button>
+         <button data-testid="invite-cancel" onclick="setState('default')">Отмена</button></p>
+    </section>
+    <section data-state="error" hidden>
+      <p class="error" data-testid="invite-error" role="alert">Введите корректный e-mail, например kollega@company.ru.</p>
+      <p class="error">Вариант F2: Этот человек уже в проекте — приглашение не требуется.</p>
+    </section>
+    <section data-state="success" hidden>
+      <p class="success" data-testid="invite-success" role="status">Приглашение отправлено на anna@team.ru. Статус виден в списке участников.</p>
+      <ul><li>anna@team.ru — <span class="badge">приглашён</span></li></ul>
+    </section>
+  </div>
+</main>
+<div class="state-bar">
+  <button onclick="setState('default')">default</button>
+  <button onclick="setState('form')">form</button>
+  <button onclick="setState('error')">error</button>
+  <button onclick="setState('success')">success</button>
+</div>
+<script>
+function setState(n){document.querySelectorAll('[data-state]').forEach(e=>{e.hidden=e.dataset.state!==n;});}
+setState('default');
+</script>
+</body></html>

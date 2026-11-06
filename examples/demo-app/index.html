@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeamBoard</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#6b7280; --line:#d1d5db; --accent:#2563eb; --bg:#f9fafb; --danger:#b91c1c; --ok:#047857; }
+  * { box-sizing:border-box; font-family:system-ui,sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--ink); }
+  header { display:flex; gap:16px; align-items:center; padding:12px 24px; background:#fff; border-bottom:1px solid var(--line); }
+  header strong { font-size:16px; }
+  main { max-width:720px; margin:24px auto; padding:0 24px; }
+  h1 { font-size:22px; margin:0 0 16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:12px; }
+  button { padding:8px 16px; border:1px solid var(--accent); border-radius:6px; background:var(--accent); color:#fff; cursor:pointer; font-size:14px; }
+  button.secondary { background:#fff; color:var(--accent); }
+  button:focus-visible, input:focus-visible, a:focus-visible { outline:3px solid #93c5fd; outline-offset:2px; }
+  input { padding:8px 12px; border:1px solid var(--line); border-radius:6px; font-size:14px; width:100%; }
+  label { display:block; font-size:14px; margin-bottom:4px; }
+  .field { margin-bottom:12px; }
+  .error { color:var(--danger); font-size:13px; margin-top:4px; }
+  .success { color:var(--ok); font-size:14px; }
+  .muted { color:var(--muted); }
+  .row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  ul { list-style:none; padding:0; margin:0; }
+  li { padding:8px 0; border-bottom:1px solid var(--line); }
+  li:last-child { border-bottom:none; }
+  .badge { font-size:12px; padding:2px 8px; border-radius:10px; background:#eef2ff; color:#3730a3; }
+  [hidden] { display:none !important; }
+  a.back { color:var(--accent); text-decoration:none; font-size:14px; }
+</style>
+</head>
+<body>
+<header>
+  <strong>TeamBoard</strong>
+  <span class="muted">Проекты и команда</span>
+</header>
+
+<main>
+  <!-- SCR-001: projects list -->
+  <section id="view-projects" data-screen="SCR-001">
+    <div class="row">
+      <h1>Проекты</h1>
+      <button data-testid="new-project">Новый проект</button>
+    </div>
+    <div class="card" id="projects-empty" data-testid="projects-empty">
+      <p>Пока нет ни одного проекта.</p>
+      <p class="muted">Создайте первый — это займёт полминуты.</p>
+      <button data-testid="empty-create">Создать первый проект</button>
+    </div>
+    <ul id="projects-list" data-testid="projects-list" hidden></ul>
+  </section>
+
+  <!-- SCR-002: create project -->
+  <section id="view-create" data-screen="SCR-002" hidden>
+    <a href="#" class="back" data-testid="back-to-projects">← К проектам</a>
+    <h1>Новый проект</h1>
+    <form class="card" id="create-form">
+      <div class="field">
+        <label for="project-name">Название проекта</label>
+        <input id="project-name" data-testid="project-name" name="name" autocomplete="off">
+        <p class="error" data-testid="create-error" role="alert" hidden></p>
+      </div>
+      <button type="submit" data-testid="create-submit">Создать проект</button>
+    </form>
+  </section>
+
+  <!-- SCR-003: project page with members -->
+  <section id="view-project" data-screen="SCR-003" hidden>
+    <a href="#" class="back" data-testid="back-to-projects-2">← К проектам</a>
+    <h1 data-testid="project-title"></h1>
+    <p class="success" data-testid="created-note" role="status" hidden>Проект создан. Теперь пригласите коллег.</p>
+    <div class="card">
+      <div class="row">
+        <h2 style="font-size:16px;margin:0">Участники</h2>
+        <button data-testid="invite-open" class="secondary">Пригласить</button>
+      </div>
+      <ul data-testid="members-list"></ul>
+      <form id="invite-form" data-testid="invite-form" hidden>
+        <div class="field">
+          <label for="invite-email">E-mail коллеги</label>
+          <input id="invite-email" data-testid="invite-email" name="email" autocomplete="off"
+                 aria-describedby="invite-error">
+          <p class="error" id="invite-error" data-testid="invite-error" role="alert" hidden></p>
+        </div>
+        <button type="submit" data-testid="invite-submit">Отправить приглашение</button>
+        <button type="button" class="secondary" data-testid="invite-cancel">Отмена</button>
+      </form>
+      <p class="success" data-testid="invite-success" role="status" hidden></p>
+    </div>
+  </section>
+</main>
+
+<script>
+const state = { projects: [], current: null };
+
+const $ = (sel) => document.querySelector(sel);
+const show = (el, on = true) => { el.hidden = !on; };
+
+function switchView(id) {
+  for (const v of ['view-projects', 'view-create', 'view-project']) show($('#' + v), v === id);
+}
+
+function renderProjects() {
+  const list = $('#projects-list');
+  const empty = $('#projects-empty');
+  show(empty, state.projects.length === 0);
+  show(list, state.projects.length > 0);
+  list.innerHTML = '';
+  state.projects.forEach((p, i) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#';
+    a.dataset.testid = 'open-project-' + i;
+    a.textContent = p.name;
+    a.addEventListener('click', (e) => { e.preventDefault(); openProject(i, false); });
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = p.members.length + ' участник(ов)';
+    li.append(a, ' ', badge);
+    list.append(li);
+  });
+}
+
+function renderMembers() {
+  const ul = $('[data-testid="members-list"]');
+  ul.innerHTML = '';
+  for (const m of state.current.members) {
+    const li = document.createElement('li');
+    li.textContent = m.email + ' — ';
+    const status = document.createElement('span');
+    status.className = 'badge';
+    status.textContent = m.status;
+    li.append(status);
+    ul.append(li);
+  }
+}
+
+function openProject(index, justCreated) {
+  state.current = state.projects[index];
+  $('[data-testid="project-title"]').textContent = state.current.name;
+  show($('[data-testid="created-note"]'), justCreated);
+  show($('[data-testid="invite-form"]'), false);
+  show($('[data-testid="invite-success"]'), false);
+  renderMembers();
+  switchView('view-project');
+}
+
+for (const id of ['new-project', 'empty-create']) {
+  $(`[data-testid="${id}"]`).addEventListener('click', () => {
+    $('[data-testid="project-name"]').value = '';
+    show($('[data-testid="create-error"]'), false);
+    switchView('view-create');
+    $('[data-testid="project-name"]').focus();
+  });
+}
+
+for (const id of ['back-to-projects', 'back-to-projects-2']) {
+  $(`[data-testid="${id}"]`).addEventListener('click', (e) => {
+    e.preventDefault();
+    renderProjects();
+    switchView('view-projects');
+  });
+}
+
+$('#create-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = $('[data-testid="project-name"]').value.trim();
+  const error = $('[data-testid="create-error"]');
+  if (!name) {
+    error.textContent = 'Укажите название проекта — так коллеги поймут, куда их пригласили.';
+    show(error);
+    return;
+  }
+  state.projects.push({ name, members: [{ email: 'you@example.com', status: 'владелец' }] });
+  openProject(state.projects.length - 1, true);
+});
+
+$('[data-testid="invite-open"]').addEventListener('click', () => {
+  show($('[data-testid="invite-form"]'));
+  show($('[data-testid="invite-success"]'), false);
+  $('[data-testid="invite-email"]').value = '';
+  show($('[data-testid="invite-error"]'), false);
+  $('[data-testid="invite-email"]').focus();
+});
+
+$('[data-testid="invite-cancel"]').addEventListener('click', () => {
+  show($('[data-testid="invite-form"]'), false);
+});
+
+$('#invite-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = $('[data-testid="invite-email"]');
+  const error = $('[data-testid="invite-error"]');
+  const email = input.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    error.textContent = 'Введите корректный e-mail, например kollega@company.ru.';
+    show(error);
+    return;
+  }
+  if (state.current.members.some((m) => m.email === email)) {
+    error.textContent = 'Этот человек уже в проекте — приглашение не требуется.';
+    show(error);
+    return;
+  }
+  show(error, false);
+  state.current.members.push({ email, status: 'приглашён' });
+  renderMembers();
+  show($('[data-testid="invite-form"]'), false);
+  const ok = $('[data-testid="invite-success"]');
+  ok.textContent = 'Приглашение отправлено на ' + email + '. Статус виден в списке участников.';
+  show(ok);
+});
+
+renderProjects();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"><title>SCR-002 — New project</title>
+<style>
+  * { font-family:system-ui,sans-serif; box-sizing:border-box; }
+  body { margin:0; background:#f9fafb; color:#1a1a1a; }
+  main { max-width:720px; margin:24px auto; padding:0 24px; }
+  .wire { border:1px dashed #d1d5db; border-radius:8px; padding:16px; background:#fff; }
+  button { padding:8px 16px; border:1px solid #2563eb; border-radius:6px; background:#2563eb; color:#fff; cursor:pointer; }
+  input { padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; width:100%; }
+  label { display:block; margin-bottom:4px; }
+  .error { color:#b91c1c; font-size:13px; }
+  [hidden] { display:none !important; }
+</style></head>
+<body data-screen="SCR-002" data-story="US-001">
+<main>
+  <a href="SCR-001.html" data-testid="back-to-projects">← К проектам</a>
+  <h1>Новый проект</h1>
+  <form class="wire" onsubmit="return submitForm(event)">
+    <label for="n">Название проекта</label>
+    <input id="n" data-testid="project-name">
+    <p class="error" data-testid="create-error" role="alert" hidden>Укажите название проекта — так коллеги поймут, куда их пригласили.</p>
+    <p><button type="submit" data-testid="create-submit">Создать проект</button></p>
+  </form>
+</main>
+<script>
+function submitForm(e){
+  e.preventDefault();
+  const empty = !document.querySelector('[data-testid="project-name"]').value.trim();
+  document.querySelector('[data-testid="create-error"]').hidden = !empty;
+  if (!empty) location.href = 'SCR-003.html';
+  return false;
+}
+</script>
+</body></html>

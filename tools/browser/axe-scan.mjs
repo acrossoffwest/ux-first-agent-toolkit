@@ -18,7 +18,8 @@ if (!values.url) {
 }
 
 const browser = await chromium.launch();
-const page = await browser.newPage();
+const context = await browser.newContext();
+const page = await context.newPage();
 await page.goto(values.url, { waitUntil: 'load' });
 
 const results = await new AxeBuilder({ page })

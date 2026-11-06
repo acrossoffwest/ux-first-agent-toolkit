@@ -18,8 +18,12 @@ async function runAction(page, baseUrl, action) {
       return;
     case 'fill': {
       const locator = resolveSelector(page, action.selector);
-      if (action.delayMs) await locator.pressSequentially(action.value, { delay: action.delayMs, timeout });
-      else await locator.fill(action.value, { timeout });
+      if (action.delayMs) {
+        await locator.fill('', { timeout });
+        await locator.pressSequentially(action.value, { delay: action.delayMs, timeout });
+      } else {
+        await locator.fill(action.value, { timeout });
+      }
       return;
     }
     case 'press':
