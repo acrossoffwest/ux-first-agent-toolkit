@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCR-000 — screen name</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#6b7280; --line:#d1d5db; --accent:#2563eb; --bg:#f9fafb; --danger:#b91c1c; }
+  * { box-sizing:border-box; font-family:system-ui,sans-serif; }
+  body { margin:0; background:var(--bg); color:var(--ink); }
+  header.app { display:flex; gap:16px; align-items:center; padding:12px 24px; background:#fff; border-bottom:1px solid var(--line); }
+  main { max-width:960px; margin:24px auto; padding:0 24px; }
+  .wire { border:1px dashed var(--line); border-radius:8px; padding:16px; margin-bottom:16px; background:#fff; }
+  button, .btn { padding:8px 16px; border:1px solid var(--accent); border-radius:6px; background:var(--accent); color:#fff; cursor:pointer; font-size:14px; }
+  .btn-secondary { background:#fff; color:var(--accent); }
+  input { padding:8px 12px; border:1px solid var(--line); border-radius:6px; font-size:14px; }
+  .error { color:var(--danger); font-size:13px; }
+  .muted { color:var(--muted); }
+  [hidden] { display:none !important; }
+  .state-bar { position:fixed; bottom:0; left:0; right:0; display:flex; gap:8px; padding:8px 24px; background:#111; }
+  .state-bar button { background:#333; border-color:#333; font-size:12px; }
+</style>
+</head>
+<body data-screen="SCR-000" data-story="US-000">
+<header class="app">
+  <strong>App name</strong>
+  <nav class="muted">breadcrumb / location</nav>
+</header>
+
+<main>
+  <!-- One section per UI state. Toggle via the state bar; every interactive element gets data-testid. -->
+  <section data-state="default" class="wire">
+    <h1>Screen title — what the user came here to do</h1>
+    <button data-testid="primary-action">Primary action</button>
+  </section>
+
+  <section data-state="loading" class="wire" hidden>
+    <p class="muted">Loading…</p>
+  </section>
+
+  <section data-state="empty" class="wire" hidden>
+    <p>Nothing here yet. <button data-testid="empty-cta" class="btn-secondary">Create the first one</button></p>
+  </section>
+
+  <section data-state="error" class="wire" hidden>
+    <p class="error" data-testid="error-message">Readable error + recovery action.</p>
+  </section>
+
+  <section data-state="success" class="wire" hidden>
+    <p data-testid="success-message">Confirmation naming what happened and the next useful action.</p>
+  </section>
+</main>
+
+<div class="state-bar" aria-label="prototype state switcher">
+  <button onclick="setState('default')">default</button>
+  <button onclick="setState('loading')">loading</button>
+  <button onclick="setState('empty')">empty</button>
+  <button onclick="setState('error')">error</button>
+  <button onclick="setState('success')">success</button>
+</div>
+
+<script>
+function setState(name) {
+  document.querySelectorAll('[data-state]').forEach(el => { el.hidden = el.dataset.state !== name; });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ux-first-agent-toolkit/timeline.schema.json",
+  "title": "Video timeline",
+  "description": "Planned final-video timeline produced by plan-timeline.mjs from recorded events + measured audio durations.",
+  "type": "object",
+  "required": ["storyId", "video", "scenes"],
+  "properties": {
+    "storyId": { "type": "string", "pattern": "^US-\\d{3,}$" },
+    "video": {
+      "type": "object",
+      "required": ["sourceFile", "width", "height", "fps"],
+      "properties": {
+        "sourceFile": { "type": "string" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "fps": { "type": "integer" }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "srcStartSec", "srcEndSec", "outStartSec", "outEndSec"],
+        "properties": {
+          "id": { "type": "string" },
+          "srcStartSec": { "type": "number", "description": "Scene start in the raw recording" },
+          "srcEndSec": { "type": "number" },
+          "outStartSec": { "type": "number", "description": "Scene start in the final video" },
+          "outEndSec": { "type": "number" },
+          "freezeExtendSec": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0,
+            "description": "Freeze-frame (tpad) added at scene end because narration outlasts the recording"
+          },
+          "intentionalSilence": { "type": "boolean", "default": false },
+          "audio": {
+            "type": "object",
+            "required": ["file", "outStartSec", "durSec"],
+            "properties": {
+              "file": { "type": "string" },
+              "outStartSec": { "type": "number" },
+              "durSec": { "type": "number", "description": "Measured from the rendered WAV, never estimated" }
+            }
+          },
+          "subtitle": {
+            "type": "object",
+            "required": ["text", "outStartSec", "outEndSec"],
+            "properties": {
+              "text": { "type": "string" },
+              "outStartSec": { "type": "number" },
+              "outEndSec": { "type": "number" }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
