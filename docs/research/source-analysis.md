@@ -4,6 +4,19 @@ Research date: 2026-11-06. Sources: Parallel Deep Research run (analyst report
 with citations), direct Exa searches of primary docs (Playwright, Silero,
 Agent Skills spec, axe-core), cross-provider Codex repo inspection.
 
+**Cross-provider verification (Codex, GPT-family).** An independent Codex pass
+over the same four repositories (via the GitHub connector; its local sandbox
+blocked cloning) reached the same conclusions: super-ux contributes the
+story→flow→screen→scenario ID chain, structural lint and a bounded clickable
+HTML prototype pattern; ux-skills contributes evidence-aware critique and a
+state-transition sweep but has no executable layer; pm-skills contributes
+JTBD/Gherkin discipline but leaves criteria unlinked to screen/test IDs;
+plugin87 contributes Playwright-backed property gates that stop short of
+story journeys. Codex's verdict on the gap matches ours verbatim: "the gap is
+integration… none provides a complete story → screen → Playwright journey →
+recorded evidence → narrated TTS video pipeline." License reads also matched
+(3× MIT, pm-skills Apache 2.0). No disagreements between the two providers.
+
 ## Comparison matrix — the four source repositories
 
 | Source | Capability | Strengths | Weaknesses | Decision | Rationale | License |
