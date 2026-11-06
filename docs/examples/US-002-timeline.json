@@ -1,0 +1,125 @@
+{
+  "storyId": "US-002",
+  "video": {
+    "sourceFile": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002/raw/video.webm",
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "scenes": [
+    {
+      "id": "SC-01",
+      "srcStartSec": 0,
+      "srcEndSec": 6.502,
+      "outStartSec": 0,
+      "outEndSec": 6.65,
+      "freezeExtendSec": 0.148,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-01.wav",
+        "outStartSec": 0.15,
+        "durSec": 6.2
+      },
+      "subtitle": {
+        "text": "Проект «Альфа» только что создан. Наша цель — позвать в него коллегу, чтобы работать вместе.",
+        "outStartSec": 0.15,
+        "outEndSec": 6.35
+      }
+    },
+    {
+      "id": "SC-02",
+      "srcStartSec": 6.502,
+      "srcEndSec": 13.589,
+      "outStartSec": 6.65,
+      "outEndSec": 13.887,
+      "freezeExtendSec": 0.15,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-02.wav",
+        "outStartSec": 6.8,
+        "durSec": 6.787
+      },
+      "subtitle": {
+        "text": "Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
+        "outStartSec": 6.8,
+        "outEndSec": 13.587
+      }
+    },
+    {
+      "id": "SC-03",
+      "srcStartSec": 13.589,
+      "srcEndSec": 21.301,
+      "outStartSec": 13.887,
+      "outEndSec": 21.749,
+      "freezeExtendSec": 0.15,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-03.wav",
+        "outStartSec": 14.037,
+        "durSec": 7.412
+      },
+      "subtitle": {
+        "text": "Сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
+        "outStartSec": 14.037,
+        "outEndSec": 21.449
+      }
+    },
+    {
+      "id": "SC-04",
+      "srcStartSec": 21.301,
+      "srcEndSec": 30.026,
+      "outStartSec": 21.749,
+      "outEndSec": 30.624,
+      "freezeExtendSec": 0.15,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-04.wav",
+        "outStartSec": 21.899,
+        "durSec": 8.425
+      },
+      "subtitle": {
+        "text": "Исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
+        "outStartSec": 21.899,
+        "outEndSec": 30.324
+      }
+    },
+    {
+      "id": "SC-05",
+      "srcStartSec": 30.026,
+      "srcEndSec": 38.177,
+      "outStartSec": 30.624,
+      "outEndSec": 38.924,
+      "freezeExtendSec": 0.149,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-05.wav",
+        "outStartSec": 30.774,
+        "durSec": 7.85
+      },
+      "subtitle": {
+        "text": "А если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
+        "outStartSec": 30.774,
+        "outEndSec": 38.624
+      }
+    },
+    {
+      "id": "SC-06",
+      "srcStartSec": 38.177,
+      "srcEndSec": 45.177,
+      "outStartSec": 38.924,
+      "outEndSec": 46.074,
+      "freezeExtendSec": 0.15,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-06.wav",
+        "outStartSec": 39.074,
+        "durSec": 6.7
+      },
+      "subtitle": {
+        "text": "Закрываем форму. Статус приглашения остаётся видимым в списке участников — задача выполнена.",
+        "outStartSec": 39.074,
+        "outEndSec": 45.774
+      }
+    }
+  ]
+}
