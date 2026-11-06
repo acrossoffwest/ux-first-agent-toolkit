@@ -1,0 +1,21 @@
+{
+  "name": "ux-first-agent-toolkit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UX-first agent toolkit for Claude Code",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:integration": "node --test tests/integration/*.test.mjs",
+    "validate": "node tools/validation/validate-skills.mjs skills commands agents && node tools/validation/validate-traceability.mjs examples/demo-app/docs/ux",
+    "demo": "npx serve examples/demo-app -l 4173"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "playwright": "^1.65.0"
+  }
+}

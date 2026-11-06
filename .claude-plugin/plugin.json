@@ -1,0 +1,10 @@
+{
+  "name": "ux-first-agent-toolkit",
+  "description": "UX-first development lifecycle for Claude Code: product intent, user stories, flows, interactive mockups, UX critique, Playwright journey testing, and narrated UX walkthrough videos (Russian TTS).",
+  "version": "0.1.0",
+  "author": {
+    "name": "acrossoffwest"
+  },
+  "homepage": "https://github.com/acrossoffwest/ux-first-agent-toolkit",
+  "license": "MIT"
+}

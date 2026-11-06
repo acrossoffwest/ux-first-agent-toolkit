@@ -1,0 +1,11 @@
+node_modules/
+.venv/
+__pycache__/
+artifacts/
+*.wav
+*.mp4
+*.webm
+*.pt
+ux.config.json
+.DS_Store
+test-results/

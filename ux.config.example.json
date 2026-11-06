@@ -1,0 +1,25 @@
+{
+  "artifactsDir": "artifacts",
+  "uxDocsDir": "docs/ux",
+  "tts": {
+    "modelId": "v5_6_ru",
+    "modelUrl": "https://models.silero.ai/models/tts/ru/v5_6_ru.pt",
+    "speaker": "baya",
+    "sampleRate": 48000
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "subtitles": "sidecar"
+  },
+  "qa": {
+    "microPauseMinSec": 0.2,
+    "microPauseMaxSec": 0.6,
+    "maxTransitionSilenceSec": 1.5,
+    "silenceNoiseDb": -40
+  },
+  "backgroundAudio": {
+    "enabled": false
+  }
+}
