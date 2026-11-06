@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 — 2026-11-06
+
+- `feature-mapping` skill + `/ux-features` command: feature ideation from
+  product intent, end-to-end journey per feature (FEAT-### artifacts), and a
+  machine-checked intersection matrix — shared screens must be declared
+  mutually, approved features must decompose into stories
+  (validate-traceability enforces both).
+- Colorful journey visuals: imagegen-driven illustrations per feature and an
+  isometric feature map, with a documented style guide and mermaid fallback.
+- Livelier narration: conversational scene openers («Итак…», «А что если…?»)
+  codified in ux-narration; demo storyboards updated.
+- Remotion polish stage (`--polish` / `video.polish.enabled`): narrated
+  intro/outro cards, animated scene badges, progress bar → `polished.mp4`
+  with its own shifted-timeline QA (`qa-polished.json`).
+
 ## 0.1.0 — 2026-11-06
 
 Initial release.

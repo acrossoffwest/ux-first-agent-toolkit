@@ -29,6 +29,7 @@ if (basename(process.argv[1] ?? '') === 'run-pipeline.mjs') {
       out: { type: 'string' },
       only: { type: 'string' },
       headed: { type: 'boolean', default: false },
+      polish: { type: 'boolean', default: false },
     },
   });
   const storyboardPath = positionals[0];
@@ -126,6 +127,17 @@ if (basename(process.argv[1] ?? '') === 'run-pipeline.mjs') {
         ]);
         break;
     }
+  }
+  if (values.polish || config.video.polish?.enabled) {
+    console.log('\n=== polish (remotion) ===');
+    sh('node', [join(TOOLKIT_ROOT, 'tools', 'video', 'polish.mjs'), '--out', out]);
+    console.log('\n=== audit (polished) ===');
+    sh('node', [
+      join(TOOLKIT_ROOT, 'tools', 'video', 'qa-video.mjs'),
+      '--video', join(out, 'polished.mp4'),
+      '--timeline', join(out, 'polished-timeline.json'),
+      '--out', join(out, 'qa-polished.json'),
+    ]);
   }
   console.log(`\npipeline done: ${paths.final} (qa: ${paths.qa})`);
 }

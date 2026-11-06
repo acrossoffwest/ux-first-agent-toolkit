@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "id": "file-exists",
+      "ok": true,
+      "detail": "artifacts/videos/US-002-v2/polished.mp4"
+    },
+    {
+      "id": "has-video-stream",
+      "ok": true,
+      "detail": "h264,aac"
+    },
+    {
+      "id": "has-audio-stream",
+      "ok": true,
+      "detail": "h264,aac"
+    },
+    {
+      "id": "duration-matches-timeline",
+      "ok": true,
+      "detail": "actual 58.90s vs planned 58.90s"
+    },
+    {
+      "id": "narration-within-scene",
+      "ok": true,
+      "detail": "all narration fits its scene"
+    },
+    {
+      "id": "no-unexplained-silence",
+      "ok": true,
+      "detail": "max allowed 1.5s"
+    }
+  ],
+  "silences": [
+    {
+      "startSec": 4.082771,
+      "endSec": 5.117958,
+      "durSec": 1.035187
+    },
+    {
+      "startSec": 11.048604,
+      "endSec": 11.812521,
+      "durSec": 0.763917
+    },
+    {
+      "startSec": 20.102167,
+      "endSec": 20.906625,
+      "durSec": 0.804458
+    },
+    {
+      "startSec": 28.17975,
+      "endSec": 28.882646,
+      "durSec": 0.702896
+    },
+    {
+      "startSec": 33.514271,
+      "endSec": 34.223583,
+      "durSec": 0.709313
+    },
+    {
+      "startSec": 37.301979,
+      "endSec": 38.082187,
+      "durSec": 0.780208
+    },
+    {
+      "startSec": 45.77175,
+      "endSec": 46.546729,
+      "durSec": 0.774979
+    },
+    {
+      "startSec": 58.030146,
+      "endSec": 58.901,
+      "durSec": 0.870854
+    }
+  ]
+}

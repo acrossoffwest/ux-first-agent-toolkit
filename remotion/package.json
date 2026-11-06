@@ -1,0 +1,11 @@
+{
+  "name": "ux-toolkit-polish",
+  "private": true,
+  "description": "Remotion composition that wraps a composed walkthrough video with intro/outro cards, scene badges and a progress bar",
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0"
+  }
+}

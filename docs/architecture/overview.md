@@ -32,6 +32,7 @@ tools/       deterministic executables
   audio/       synth_narration (Silero), detect-gaps, setup-venv
   video/       plan-timeline, compose, qa-video, run-pipeline
 templates/   artifact formats + JSON schemas (storyboard, timeline)
+remotion/    optional polish compositions (intro/outro, badges, progress)
 examples/    TeamBoard demo app with a complete artifact chain
 tests/       unit + integration (real Chromium, real ffmpeg, real Silero)
 ```

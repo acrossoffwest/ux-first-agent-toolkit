@@ -4,56 +4,158 @@
   "title": "Storyboard",
   "description": "Executable storyboard for one user story: scenes carry both narration and browser actions. Used by ux-test (actions only) and the full video pipeline.",
   "type": "object",
-  "required": ["storyId", "baseUrl", "scenes"],
+  "required": [
+    "storyId",
+    "baseUrl",
+    "scenes"
+  ],
   "properties": {
-    "storyId": { "type": "string", "pattern": "^US-\\d{3,}$" },
-    "title": { "type": "string" },
-    "baseUrl": { "type": "string" },
+    "storyId": {
+      "type": "string",
+      "pattern": "^US-\\d{3,}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "baseUrl": {
+      "type": "string"
+    },
     "scenes": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "narration", "actions"],
+        "required": [
+          "id",
+          "narration",
+          "actions"
+        ],
         "properties": {
-          "id": { "type": "string", "pattern": "^SC-\\d{2,}$" },
-          "title": { "type": "string" },
-          "screenId": { "type": "string", "pattern": "^SCR-\\d{3,}$" },
+          "id": {
+            "type": "string",
+            "pattern": "^SC-\\d{2,}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "screenId": {
+            "type": "string",
+            "pattern": "^SCR-\\d{3,}$"
+          },
           "narration": {
             "type": "string",
             "description": "Russian narration text, grounded in observable on-screen events. Empty string = intentionally silent scene (requires intentionalSilence: true)."
           },
-          "intentionalSilence": { "type": "boolean", "default": false },
+          "intentionalSilence": {
+            "type": "boolean",
+            "default": false
+          },
           "minHoldSec": {
             "type": "number",
             "minimum": 0,
             "default": 1,
             "description": "Minimum on-screen time for the scene even if narration is shorter."
           },
-          "transition": { "type": "string", "enum": ["cut", "hold"], "default": "cut" },
+          "transition": {
+            "type": "string",
+            "enum": [
+              "cut",
+              "hold"
+            ],
+            "default": "cut"
+          },
           "actions": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["type"],
+              "required": [
+                "type"
+              ],
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["goto", "click", "fill", "press", "hover", "expect-visible", "expect-text", "expect-url", "wait"]
+                  "enum": [
+                    "goto",
+                    "click",
+                    "fill",
+                    "press",
+                    "hover",
+                    "expect-visible",
+                    "expect-text",
+                    "expect-url",
+                    "wait"
+                  ]
                 },
-                "selector": { "type": "string", "description": "CSS selector or data-testid=... shorthand" },
-                "url": { "type": "string" },
-                "value": { "type": "string" },
-                "text": { "type": "string" },
-                "key": { "type": "string" },
-                "timeoutMs": { "type": "integer", "minimum": 0 },
-                "delayMs": { "type": "integer", "minimum": 0, "description": "Typing delay for fill, for a human pace on video" }
+                "selector": {
+                  "type": "string",
+                  "description": "CSS selector or data-testid=... shorthand"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "timeoutMs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "delayMs": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Typing delay for fill, for a human pace on video"
+                }
               },
               "additionalProperties": false
             }
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "Short on-screen badge text for the polish stage; omit for no badge"
           }
         },
         "additionalProperties": false
+      }
+    },
+    "polish": {
+      "type": "object",
+      "description": "Optional Remotion polish stage: intro/outro cards and narration",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "intro": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "narration": {
+              "type": "string"
+            }
+          }
+        },
+        "outro": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "narration": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   },

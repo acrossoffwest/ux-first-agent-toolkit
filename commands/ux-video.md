@@ -1,6 +1,6 @@
 ---
 description: Record, narrate (Russian, Silero baya) and render a UX walkthrough video for a user story, with silence-gap QA. Produces artifacts/videos/US-###/final.mp4 + qa-report.json.
-argument-hint: "US-### [--only narrate|record|plan|compose|audit]"
+argument-hint: "US-### [--only narrate|record|plan|compose|audit] [--polish]"
 ---
 
 Produce the narrated walkthrough for the story in $ARGUMENTS.
@@ -10,6 +10,11 @@ Produce the narrated walkthrough for the story in $ARGUMENTS.
    no filler, bridges over transitions).
 2. Run `node tools/video/run-pipeline.mjs <storyboard> --out artifacts/videos/US-###/`
    (pass `--only <stage>` from $ARGUMENTS when iterating).
+   With `--polish` (or `video.polish.enabled` in ux.config.json): Remotion
+   wraps the result — narrated intro/outro cards, animated scene badges
+   (storyboard `label` fields), progress bar — into `polished.mp4`, QA'd
+   separately via `polished-timeline.json` → `qa-polished.json`. Needs a
+   one-time `npm install --prefix remotion`.
 3. Apply the `ux-video-qa` skill to the result: the video exists only when
    qa-report.json says ok:true. Drive the fix loop otherwise.
 

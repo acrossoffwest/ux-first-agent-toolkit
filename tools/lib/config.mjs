@@ -10,7 +10,7 @@ export const DEFAULTS = {
     speaker: 'baya',
     sampleRate: 48000,
   },
-  video: { width: 1280, height: 720, fps: 30, subtitles: 'sidecar' },
+  video: { width: 1280, height: 720, fps: 30, subtitles: 'sidecar', polish: { enabled: false } },
   qa: {
     microPauseMinSec: 0.2,
     microPauseMaxSec: 0.6,

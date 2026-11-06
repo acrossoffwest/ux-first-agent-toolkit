@@ -10,69 +10,159 @@
       "narration": "Проект «Альфа» только что создан. Наша цель — позвать в него коллегу, чтобы работать вместе.",
       "minHoldSec": 2,
       "actions": [
-        { "type": "goto", "url": "/" },
-        { "type": "click", "selector": "testid=empty-create" },
-        { "type": "fill", "selector": "testid=project-name", "value": "Альфа", "delayMs": 60 },
-        { "type": "click", "selector": "testid=create-submit" },
-        { "type": "expect-visible", "selector": "testid=created-note" }
-      ]
+        {
+          "type": "goto",
+          "url": "/"
+        },
+        {
+          "type": "click",
+          "selector": "testid=empty-create"
+        },
+        {
+          "type": "fill",
+          "selector": "testid=project-name",
+          "value": "Альфа",
+          "delayMs": 60
+        },
+        {
+          "type": "click",
+          "selector": "testid=create-submit"
+        },
+        {
+          "type": "expect-visible",
+          "selector": "testid=created-note"
+        }
+      ],
+      "label": "Проект создан"
     },
     {
       "id": "SC-02",
       "title": "Open the invite form",
       "screenId": "SCR-003",
-      "narration": "Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
+      "narration": "Итак, зовём коллегу. Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
       "actions": [
-        { "type": "click", "selector": "testid=invite-open" },
-        { "type": "expect-visible", "selector": "testid=invite-email" }
-      ]
+        {
+          "type": "click",
+          "selector": "testid=invite-open"
+        },
+        {
+          "type": "expect-visible",
+          "selector": "testid=invite-email"
+        }
+      ],
+      "label": "Форма приглашения"
     },
     {
       "id": "SC-03",
       "title": "Invalid email is rejected",
       "screenId": "SCR-003",
-      "narration": "Сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
+      "narration": "Но сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
       "actions": [
-        { "type": "fill", "selector": "testid=invite-email", "value": "не-почта", "delayMs": 60 },
-        { "type": "click", "selector": "testid=invite-submit" },
-        { "type": "expect-text", "selector": "testid=invite-error", "text": "Введите корректный e-mail" }
-      ]
+        {
+          "type": "fill",
+          "selector": "testid=invite-email",
+          "value": "не-почта",
+          "delayMs": 60
+        },
+        {
+          "type": "click",
+          "selector": "testid=invite-submit"
+        },
+        {
+          "type": "expect-text",
+          "selector": "testid=invite-error",
+          "text": "Введите корректный e-mail"
+        }
+      ],
+      "label": "Опечатка в адресе"
     },
     {
       "id": "SC-04",
       "title": "Successful invitation",
       "screenId": "SCR-003",
-      "narration": "Исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
+      "narration": "Теперь исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
       "minHoldSec": 2,
       "actions": [
-        { "type": "fill", "selector": "testid=invite-email", "value": "anna@team.ru", "delayMs": 60 },
-        { "type": "click", "selector": "testid=invite-submit" },
-        { "type": "expect-text", "selector": "testid=invite-success", "text": "Приглашение отправлено на anna@team.ru" },
-        { "type": "expect-text", "selector": "testid=members-list", "text": "anna@team.ru" }
-      ]
+        {
+          "type": "fill",
+          "selector": "testid=invite-email",
+          "value": "anna@team.ru",
+          "delayMs": 60
+        },
+        {
+          "type": "click",
+          "selector": "testid=invite-submit"
+        },
+        {
+          "type": "expect-text",
+          "selector": "testid=invite-success",
+          "text": "Приглашение отправлено на anna@team.ru"
+        },
+        {
+          "type": "expect-text",
+          "selector": "testid=members-list",
+          "text": "anna@team.ru"
+        }
+      ],
+      "label": "Коллега приглашён"
     },
     {
       "id": "SC-05",
       "title": "Duplicate invite is prevented",
       "screenId": "SCR-003",
-      "narration": "А если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
+      "narration": "А что если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
       "actions": [
-        { "type": "click", "selector": "testid=invite-open" },
-        { "type": "fill", "selector": "testid=invite-email", "value": "anna@team.ru", "delayMs": 60 },
-        { "type": "click", "selector": "testid=invite-submit" },
-        { "type": "expect-text", "selector": "testid=invite-error", "text": "уже в проекте" }
-      ]
+        {
+          "type": "click",
+          "selector": "testid=invite-open"
+        },
+        {
+          "type": "fill",
+          "selector": "testid=invite-email",
+          "value": "anna@team.ru",
+          "delayMs": 60
+        },
+        {
+          "type": "click",
+          "selector": "testid=invite-submit"
+        },
+        {
+          "type": "expect-text",
+          "selector": "testid=invite-error",
+          "text": "уже в проекте"
+        }
+      ],
+      "label": "Дубликат"
     },
     {
       "id": "SC-06",
       "title": "Status remains visible",
       "screenId": "SCR-003",
-      "narration": "Закрываем форму. Статус приглашения остаётся видимым в списке участников — задача выполнена.",
+      "narration": "Готово — закрываем форму. Статус приглашения остаётся видимым в списке участников, задача выполнена.",
       "minHoldSec": 2,
       "actions": [
-        { "type": "click", "selector": "testid=invite-cancel" },
-        { "type": "expect-text", "selector": "testid=members-list", "text": "приглашён" }
-      ]
+        {
+          "type": "click",
+          "selector": "testid=invite-cancel"
+        },
+        {
+          "type": "expect-text",
+          "selector": "testid=members-list",
+          "text": "приглашён"
+        }
+      ],
+      "label": "Статус в списке"
     }
-  ]
+  ],
+  "polish": {
+    "title": "TeamBoard — приглашение коллеги",
+    "subtitle": "US-002 · UX-прохождение",
+    "intro": {
+      "narration": "ТимБорд. История вторая: приглашаем коллегу в проект."
+    },
+    "outro": {
+      "narration": "Все сценарии пройдены: ошибка, успех и дубликат.",
+      "text": "Все проверки пройдены"
+    }
+  }
 }

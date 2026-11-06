@@ -4,7 +4,7 @@
     {
       "id": "file-exists",
       "ok": true,
-      "detail": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002/final.mp4"
+      "detail": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002-v2/final.mp4"
     },
     {
       "id": "has-video-stream",
@@ -19,7 +19,7 @@
     {
       "id": "duration-matches-timeline",
       "ok": true,
-      "detail": "actual 46.10s vs planned 46.07s"
+      "detail": "actual 49.28s vs planned 49.28s"
     },
     {
       "id": "narration-within-scene",
@@ -35,28 +35,28 @@
   "silences": [
     {
       "startSec": 6.083146,
-      "endSec": 6.801687,
-      "durSec": 0.718542
+      "endSec": 6.809104,
+      "durSec": 0.725958
     },
     {
-      "startSec": 13.32075,
-      "endSec": 14.039104,
-      "durSec": 0.718354
+      "startSec": 15.138271,
+      "endSec": 15.936479,
+      "durSec": 0.798208
     },
     {
-      "startSec": 21.200479,
-      "endSec": 21.948062,
-      "durSec": 0.747583
+      "startSec": 23.214437,
+      "endSec": 23.914062,
+      "durSec": 0.699625
     },
     {
-      "startSec": 30.044,
-      "endSec": 30.799417,
-      "durSec": 0.755417
+      "startSec": 32.335625,
+      "endSec": 33.113375,
+      "durSec": 0.77775
     },
     {
-      "startSec": 38.344646,
-      "endSec": 39.096667,
-      "durSec": 0.752021
+      "startSec": 40.822542,
+      "endSec": 41.579917,
+      "durSec": 0.757375
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "storyId": "US-002",
   "video": {
-    "sourceFile": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002/raw/video.webm",
+    "sourceFile": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002-v2/raw/video.webm",
     "width": 1280,
     "height": 720,
     "fps": 30
@@ -10,10 +10,10 @@
     {
       "id": "SC-01",
       "srcStartSec": 0,
-      "srcEndSec": 6.502,
+      "srcEndSec": 6.501,
       "outStartSec": 0,
       "outEndSec": 6.65,
-      "freezeExtendSec": 0.148,
+      "freezeExtendSec": 0.149,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-01.wav",
@@ -28,97 +28,97 @@
     },
     {
       "id": "SC-02",
-      "srcStartSec": 6.502,
-      "srcEndSec": 13.589,
+      "srcStartSec": 6.501,
+      "srcEndSec": 15.428,
       "outStartSec": 6.65,
-      "outEndSec": 13.887,
-      "freezeExtendSec": 0.15,
+      "outEndSec": 15.725,
+      "freezeExtendSec": 0.148,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-02.wav",
         "outStartSec": 6.8,
-        "durSec": 6.787
+        "durSec": 8.625
       },
       "subtitle": {
-        "text": "Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
+        "text": "Итак, зовём коллегу. Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
         "outStartSec": 6.8,
-        "outEndSec": 13.587
+        "outEndSec": 15.425
       }
     },
     {
       "id": "SC-03",
-      "srcStartSec": 13.589,
-      "srcEndSec": 21.301,
-      "outStartSec": 13.887,
-      "outEndSec": 21.749,
-      "freezeExtendSec": 0.15,
+      "srcStartSec": 15.428,
+      "srcEndSec": 23.317,
+      "outStartSec": 15.725,
+      "outEndSec": 23.763,
+      "freezeExtendSec": 0.149,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-03.wav",
-        "outStartSec": 14.037,
-        "durSec": 7.412
+        "outStartSec": 15.875,
+        "durSec": 7.588
       },
       "subtitle": {
-        "text": "Сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
-        "outStartSec": 14.037,
-        "outEndSec": 21.449
+        "text": "Но сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
+        "outStartSec": 15.875,
+        "outEndSec": 23.463
       }
     },
     {
       "id": "SC-04",
-      "srcStartSec": 21.301,
-      "srcEndSec": 30.026,
-      "outStartSec": 21.749,
-      "outEndSec": 30.624,
-      "freezeExtendSec": 0.15,
+      "srcStartSec": 23.317,
+      "srcEndSec": 32.345,
+      "outStartSec": 23.763,
+      "outEndSec": 32.938,
+      "freezeExtendSec": 0.147,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-04.wav",
-        "outStartSec": 21.899,
-        "durSec": 8.425
+        "outStartSec": 23.913,
+        "durSec": 8.725
       },
       "subtitle": {
-        "text": "Исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
-        "outStartSec": 21.899,
-        "outEndSec": 30.324
+        "text": "Теперь исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
+        "outStartSec": 23.913,
+        "outEndSec": 32.638
       }
     },
     {
       "id": "SC-05",
-      "srcStartSec": 30.026,
-      "srcEndSec": 38.177,
-      "outStartSec": 30.624,
-      "outEndSec": 38.924,
+      "srcStartSec": 32.345,
+      "srcEndSec": 40.646,
+      "outStartSec": 32.938,
+      "outEndSec": 41.388,
       "freezeExtendSec": 0.149,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-05.wav",
-        "outStartSec": 30.774,
-        "durSec": 7.85
+        "outStartSec": 33.088,
+        "durSec": 8
       },
       "subtitle": {
-        "text": "А если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
-        "outStartSec": 30.774,
-        "outEndSec": 38.624
+        "text": "А что если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
+        "outStartSec": 33.088,
+        "outEndSec": 41.088
       }
     },
     {
       "id": "SC-06",
-      "srcStartSec": 38.177,
-      "srcEndSec": 45.177,
-      "outStartSec": 38.924,
-      "outEndSec": 46.074,
-      "freezeExtendSec": 0.15,
+      "srcStartSec": 40.646,
+      "srcEndSec": 48.385,
+      "outStartSec": 41.388,
+      "outEndSec": 49.276,
+      "freezeExtendSec": 0.149,
       "intentionalSilence": false,
       "audio": {
         "file": "scene-SC-06.wav",
-        "outStartSec": 39.074,
-        "durSec": 6.7
+        "outStartSec": 41.538,
+        "durSec": 7.438
       },
       "subtitle": {
-        "text": "Закрываем форму. Статус приглашения остаётся видимым в списке участников — задача выполнена.",
-        "outStartSec": 39.074,
-        "outEndSec": 45.774
+        "text": "Готово — закрываем форму. Статус приглашения остаётся видимым в списке участников, задача выполнена.",
+        "outStartSec": 41.538,
+        "outEndSec": 48.976
       }
     }
   ]

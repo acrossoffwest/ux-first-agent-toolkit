@@ -1,0 +1,146 @@
+{
+  "storyId": "US-002",
+  "video": {
+    "sourceFile": "/Volumes/OwnProjects/user-stories-app-dev-management/ux-first-agent-toolkit/artifacts/videos/US-002-v2/raw/video.webm",
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "scenes": [
+    {
+      "id": "INTRO",
+      "outStartSec": 0,
+      "outEndSec": 4.962000000000001,
+      "intentionalSilence": false,
+      "audio": {
+        "outStartSec": 0.15,
+        "durSec": 4.362
+      }
+    },
+    {
+      "id": "SC-01",
+      "srcStartSec": 0,
+      "srcEndSec": 6.501,
+      "outStartSec": 4.962000000000001,
+      "outEndSec": 11.612000000000002,
+      "freezeExtendSec": 0.149,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-01.wav",
+        "outStartSec": 5.112000000000001,
+        "durSec": 6.2
+      },
+      "subtitle": {
+        "text": "Проект «Альфа» только что создан. Наша цель — позвать в него коллегу, чтобы работать вместе.",
+        "outStartSec": 0.15,
+        "outEndSec": 6.35
+      }
+    },
+    {
+      "id": "SC-02",
+      "srcStartSec": 6.501,
+      "srcEndSec": 15.428,
+      "outStartSec": 11.612000000000002,
+      "outEndSec": 20.687,
+      "freezeExtendSec": 0.148,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-02.wav",
+        "outStartSec": 11.762,
+        "durSec": 8.625
+      },
+      "subtitle": {
+        "text": "Итак, зовём коллегу. Кнопка приглашения находится там, где ожидаешь — рядом со списком участников. Открываем форму.",
+        "outStartSec": 6.8,
+        "outEndSec": 15.425
+      }
+    },
+    {
+      "id": "SC-03",
+      "srcStartSec": 15.428,
+      "srcEndSec": 23.317,
+      "outStartSec": 20.687,
+      "outEndSec": 28.725,
+      "freezeExtendSec": 0.149,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-03.wav",
+        "outStartSec": 20.837,
+        "durSec": 7.588
+      },
+      "subtitle": {
+        "text": "Но сначала — опечатка в адресе. Интерфейс не теряет введённое и объясняет, как выглядит корректный адрес.",
+        "outStartSec": 15.875,
+        "outEndSec": 23.463
+      }
+    },
+    {
+      "id": "SC-04",
+      "srcStartSec": 23.317,
+      "srcEndSec": 32.345,
+      "outStartSec": 28.725,
+      "outEndSec": 37.900000000000006,
+      "freezeExtendSec": 0.147,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-04.wav",
+        "outStartSec": 28.875,
+        "durSec": 8.725
+      },
+      "subtitle": {
+        "text": "Теперь исправляем адрес и отправляем. Подтверждение называет адрес, а коллега появляется в списке со статусом «приглашён».",
+        "outStartSec": 23.913,
+        "outEndSec": 32.638
+      }
+    },
+    {
+      "id": "SC-05",
+      "srcStartSec": 32.345,
+      "srcEndSec": 40.646,
+      "outStartSec": 37.900000000000006,
+      "outEndSec": 46.35,
+      "freezeExtendSec": 0.149,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-05.wav",
+        "outStartSec": 38.050000000000004,
+        "durSec": 8
+      },
+      "subtitle": {
+        "text": "А что если пригласить того же человека ещё раз? Дубликат не создаётся — интерфейс сообщает, что коллега уже в проекте.",
+        "outStartSec": 33.088,
+        "outEndSec": 41.088
+      }
+    },
+    {
+      "id": "SC-06",
+      "srcStartSec": 40.646,
+      "srcEndSec": 48.385,
+      "outStartSec": 46.35,
+      "outEndSec": 54.23800000000001,
+      "freezeExtendSec": 0.149,
+      "intentionalSilence": false,
+      "audio": {
+        "file": "scene-SC-06.wav",
+        "outStartSec": 46.5,
+        "durSec": 7.438
+      },
+      "subtitle": {
+        "text": "Готово — закрываем форму. Статус приглашения остаётся видимым в списке участников, задача выполнена.",
+        "outStartSec": 41.538,
+        "outEndSec": 48.976
+      }
+    },
+    {
+      "id": "OUTRO",
+      "outStartSec": 54.23800000000001,
+      "outEndSec": 58.900000000000006,
+      "intentionalSilence": false,
+      "audio": {
+        "outStartSec": 54.388000000000005,
+        "durSec": 4.062
+      }
+    }
+  ],
+  "polished": true
+}

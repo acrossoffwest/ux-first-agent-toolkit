@@ -32,6 +32,7 @@ No cloud services are required.
 | Command | Purpose |
 |---|---|
 | `/ux-init` | Create or inspect UX context (product-intent, artifact status) |
+| `/ux-features` | Feature map: ideation, end-to-end journey per feature, intersection matrix, journey visuals |
 | `/ux-story` | Full story chain: US + UC + flows + prototypes + critique + gate |
 | `/ux-build US-###` | Implement a story — hard gate on approved artifacts |
 | `/ux-test [US-###]` | Execute journeys + axe scans, per-scenario verdicts |
@@ -39,7 +40,7 @@ No cloud services are required.
 | `/ux-audit` | Independent final audit → SHIP / DO NOT SHIP with evidence |
 | `/ux-full-cycle` | All of the above with gates between phases |
 
-Experienced users can invoke skills (`product-discovery`,
+Experienced users can invoke skills (`product-discovery`, `feature-mapping`,
 `user-story-architect`, `ux-flow-design`, `ux-prototyping`, `ux-critique`,
 `ux-audit`, `ux-video-director`, `ux-narration`, `ux-video-qa`) and the
 tools under `tools/` directly.
@@ -58,6 +59,11 @@ Audio-first pacing prevents silent gaps at recording time; QA then measures
 the **rendered** soundtrack and fails on unexplained silence over the
 configured threshold (`ux.config.json` → `qa.maxTransitionSilenceSec`).
 A video "exists" only when `qa-report.json` says `ok: true`.
+
+**Polish (optional, Remotion):** `--polish` wraps `final.mp4` with a narrated
+intro card, animated scene badges, a progress bar and an outro —
+`polished.mp4`, QA'd against its own shifted timeline (`qa-polished.json`).
+One-time setup: `npm install --prefix remotion`.
 
 ## Try it on the demo app
 

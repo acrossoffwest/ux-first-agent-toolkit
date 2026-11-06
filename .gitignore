@@ -9,3 +9,4 @@ artifacts/
 ux.config.json
 .DS_Store
 test-results/
+remotion/public/
