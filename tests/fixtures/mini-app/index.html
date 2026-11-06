@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Fixture mini app</title>
+</head>
+<body>
+<main>
+  <h1>Мини-приложение</h1>
+  <button data-testid="open-form">Открыть форму</button>
+  <form data-testid="form" hidden>
+    <label>Имя <input data-testid="name-input" name="name"></label>
+    <button type="button" data-testid="save">Сохранить</button>
+  </form>
+  <p data-testid="result" hidden></p>
+</main>
+<script>
+document.querySelector('[data-testid="open-form"]').addEventListener('click', () => {
+  document.querySelector('[data-testid="form"]').hidden = false;
+});
+document.querySelector('[data-testid="save"]').addEventListener('click', () => {
+  const name = document.querySelector('[data-testid="name-input"]').value;
+  const result = document.querySelector('[data-testid="result"]');
+  result.textContent = name ? 'Сохранено: ' + name : 'Ошибка: имя не заполнено';
+  result.hidden = false;
+});
+</script>
+</body>
+</html>
