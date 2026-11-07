@@ -33,6 +33,7 @@ No cloud services are required.
 |---|---|
 | `/ux-init` | Create or inspect UX context (product-intent, artifact status) |
 | `/ux-features` | Feature map: ideation, end-to-end journey per feature, intersection matrix, journey visuals |
+| `/ux-discover` | Reverse-engineer an existing codebase: surface sweep → shipped FEAT files with code evidence → reality diff vs docs |
 | `/ux-story` | Full story chain: US + UC + flows + prototypes + critique + gate |
 | `/ux-build US-###` | Implement a story — hard gate on approved artifacts |
 | `/ux-test [US-###]` | Execute journeys + axe scans, per-scenario verdicts |
@@ -41,6 +42,7 @@ No cloud services are required.
 | `/ux-full-cycle` | All of the above with gates between phases |
 
 Experienced users can invoke skills (`product-discovery`, `feature-mapping`,
+`feature-discovery`,
 `user-story-architect`, `ux-flow-design`, `ux-prototyping`, `ux-critique`,
 `ux-audit`, `ux-video-director`, `ux-narration`, `ux-video-qa`) and the
 tools under `tools/` directly.

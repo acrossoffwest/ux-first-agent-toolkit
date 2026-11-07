@@ -1,11 +1,14 @@
 ---
 id: FEAT-000
 title: <short feature name>
-status: proposed # proposed | approved | descoped
+status: proposed # proposed | approved | descoped | shipped (discovered in code)
 job: <the user job this feature serves, one line>
 stories: [US-000]
 screens: [SCR-000]
 intersects: []
+# discovered features only:
+# evidence: [src/path/file.ts, crates/app/src/cmd.rs]
+# confidence: high # high | low (entry point not traced to working code)
 ---
 
 # FEAT-000 — <title>

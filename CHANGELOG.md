@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0 — 2026-11-08
+
+- `feature-discovery` skill + `/ux-discover` command: reverse-engineer an
+  existing codebase — parallel surface sweep (UI, CLI, API, MCP, background,
+  hidden flags), clustered inventory with code `evidence:`, shipped
+  `FEAT-###.md` files, and a reality diff (promised-not-found /
+  found-not-documented); `workflows/existing-product.md` for toolkit adoption
+- FEAT template: `status: shipped`, optional `evidence:`/`confidence:` for
+  discovered features
+- Dual-voice TTS: Latin runs in narration are synthesized by Silero `v3_en`
+  (female `en_99`, config `tts.en`) and spliced into the Russian track
+- `evaluate` storyboard action: run a JS expression in page context (trigger
+  mocked backend events on camera)
+- `ux-video-director`: «Полный цикл ОТ А ДО Я» gate for feature explainers —
+  entry path, interaction and return path must be shown on screen
+- storyboard `storyId` accepts uppercase slugs for feature explainers
+
 ## 0.2.0 — 2026-11-06
 
 - `feature-mapping` skill + `/ux-features` command: feature ideation from
