@@ -18,7 +18,8 @@
           "type": "expect-visible",
           "selector": "testid=projects-empty"
         }
-      ]
+      ],
+      "label": "Пустой список"
     },
     {
       "id": "SC-02",
@@ -34,7 +35,8 @@
           "type": "expect-visible",
           "selector": "testid=project-name"
         }
-      ]
+      ],
+      "label": "Форма проекта"
     },
     {
       "id": "SC-03",
@@ -51,7 +53,8 @@
           "selector": "testid=create-error",
           "text": "Укажите название проекта"
         }
-      ]
+      ],
+      "label": "Пустое название"
     },
     {
       "id": "SC-04",
@@ -79,7 +82,19 @@
           "type": "expect-visible",
           "selector": "testid=created-note"
         }
-      ]
+      ],
+      "label": "Проект «Альфа»"
     }
-  ]
+  ],
+  "polish": {
+    "title": "TeamBoard — создание проекта",
+    "subtitle": "US-001 · UX-прохождение",
+    "intro": {
+      "narration": "ТимБорд. История первая: создаём проект с нуля."
+    },
+    "outro": {
+      "narration": "Проект создан. Пустая форма обработана, путь к приглашениям открыт.",
+      "text": "Все проверки пройдены"
+    }
+  }
 }
