@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import { join, dirname, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -52,7 +52,14 @@ if (basename(process.argv[1] ?? '') === 'run-pipeline.mjs') {
     final: join(out, 'final.mp4'),
     qa: join(out, 'qa-report.json'),
   };
-  if (resolve(storyboardPath) !== paths.storyboard) copyFileSync(storyboardPath, paths.storyboard);
+  if (resolve(storyboardPath) !== paths.storyboard) {
+    if (storyboard.initScript) {
+      const absInit = resolve(dirname(resolve(storyboardPath)), storyboard.initScript);
+      writeFileSync(paths.storyboard, JSON.stringify({ ...storyboard, initScript: absInit }, null, 2));
+    } else {
+      copyFileSync(storyboardPath, paths.storyboard);
+    }
+  }
 
   const stages = planStages({
     only: values.only ?? null,

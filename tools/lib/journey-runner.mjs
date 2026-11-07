@@ -58,7 +58,7 @@ async function runAction(page, baseUrl, action) {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function runJourney(storyboard, { outDir, durations = {}, video = null, headless = true }) {
+export async function runJourney(storyboard, { outDir, durations = {}, video = null, headless = true, initScript = null }) {
   mkdirSync(outDir, { recursive: true });
   const rawDir = join(outDir, 'raw');
   const browser = await chromium.launch({ headless });
@@ -69,6 +69,7 @@ export async function runJourney(storyboard, { outDir, durations = {}, video = n
     contextOptions.recordVideo = { dir: rawDir, size: { width: video.width, height: video.height }, fps: video.fps };
   }
   const context = await browser.newContext(contextOptions);
+  if (initScript) await context.addInitScript({ path: initScript });
   const page = await context.newPage();
 
   const events = { storyId: storyboard.storyId, ok: true, scenes: [] };

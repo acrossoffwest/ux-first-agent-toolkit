@@ -157,6 +157,10 @@
           }
         }
       }
+    },
+    "initScript": {
+      "type": "string",
+      "description": "Path (relative to this storyboard file) to a JS file injected via context.addInitScript before every page load — for mocking app backends (e.g. Tauri invoke) or seeding auth"
     }
   },
   "additionalProperties": false

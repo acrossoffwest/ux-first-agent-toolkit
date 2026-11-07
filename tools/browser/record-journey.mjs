@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { runJourney } from '../lib/journey-runner.mjs';
 import { loadConfig } from '../lib/config.mjs';
@@ -31,6 +31,9 @@ const events = await runJourney(storyboard, {
   durations,
   video: values['no-video'] ? null : config.video,
   headless: !values.headed,
+  initScript: storyboard.initScript
+    ? resolve(dirname(resolve(values.storyboard)), storyboard.initScript)
+    : null,
 });
 
 mkdirSync(values.out, { recursive: true });
