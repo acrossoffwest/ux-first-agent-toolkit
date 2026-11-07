@@ -59,3 +59,7 @@ US-###.md (acceptance criteria)
   with tpad freezes only when narration outruns a scene — no scene reordering
   or trimming in v1 (deliberate: compression strategies beyond pacing are in
   gap-strategies.md as manual moves).
+- The polish stage stages its inputs through `remotion/public/` (a single
+  shared directory) and re-renders on every run: polished videos from two
+  pipelines must not render concurrently, and polish adds ~1 min per run
+  (acceptable: polish is opt-in and last).

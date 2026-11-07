@@ -1,7 +1,11 @@
 # Workflow: new product (greenfield)
 
 1. `/ux-init` — product-discovery interview → `product-intent.md`.
-2. `user-story-architect` story map → walking skeleton (3–7 stories max).
+2. `/ux-features` — feature map: ideation, journey per feature, intersection
+   matrix. The walking skeleton is chosen from *approved features*, not from
+   a flat story list.
+3. `user-story-architect` story map → walking skeleton (3–7 stories max),
+   one story per approved feature's Decomposition table first.
 3. For each skeleton story: `/ux-story` (artifacts + critique + approval).
 4. Prototype review session: user clicks through the linked prototypes for the
    whole skeleton before any implementation. Navigation problems found here
