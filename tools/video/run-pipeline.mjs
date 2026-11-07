@@ -88,6 +88,8 @@ if (basename(process.argv[1] ?? '') === 'run-pipeline.mjs') {
           '--out', paths.voiceDir,
           '--model-url', config.tts.modelUrl,
           '--speaker', config.tts.speaker,
+          '--en-model-url', config.tts.en.modelUrl,
+          '--en-speaker', config.tts.en.speaker,
           '--sample-rate', String(config.tts.sampleRate),
         ]);
         break;

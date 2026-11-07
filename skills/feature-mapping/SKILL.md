@@ -39,6 +39,11 @@ starts at app entry (cold start), not at the feature's own screen.
 - **Repeat use:** what the feature remembers, where it surfaces passively.
   A feature used daily and a feature used once a quarter need different
   entry points — say which this is.
+- **Data loop (А→Я):** where the feature's objects COME FROM (user action,
+  agent/CLI command, webhook, import) and where results GO after the user
+  acts (back to an agent session, a notification, another screen). A journey
+  that covers only the feature's own screen is incomplete — name both ends
+  of the loop explicitly; videos and stories inherit them.
 
 ## Stage 3 — Intersection matrix
 

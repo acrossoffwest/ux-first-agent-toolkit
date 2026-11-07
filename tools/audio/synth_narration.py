@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Synthesize per-scene Russian narration from a storyboard with Silero TTS.
+"""Synthesize per-scene narration from a storyboard with Silero TTS.
+
+Russian (Cyrillic) text goes to the Russian model; Latin-script runs are
+synthesized by a separate English Silero model (female voice by default)
+and spliced in, so English terms are pronounced instead of mangled.
 
 Writes scene-<id>.wav (16-bit PCM) and durations.json with durations measured
 from the rendered audio, never from estimates.
@@ -7,10 +11,27 @@ from the rendered audio, never from estimates.
 
 import argparse
 import json
+import re
 import sys
 import urllib.request
 import wave
 from pathlib import Path
+
+LATIN_RUN = re.compile(r"[A-Za-z][A-Za-z0-9'&+./-]*(?:\s+[A-Za-z][A-Za-z0-9'&+./-]*)*")
+
+
+def split_segments(text: str):
+    """Split text into [('ru'|'en', chunk)] keeping order; punctuation stays with ru."""
+    segments = []
+    pos = 0
+    for match in LATIN_RUN.finditer(text):
+        if match.start() > pos:
+            segments.append(("ru", text[pos:match.start()]))
+        segments.append(("en", match.group()))
+        pos = match.end()
+    if pos < len(text):
+        segments.append(("ru", text[pos:]))
+    return [(lang, chunk) for lang, chunk in segments if chunk.strip()]
 
 
 def fail(message: str) -> None:
@@ -51,6 +72,9 @@ def main() -> None:
     parser.add_argument("--model-file", default=str(Path.home() / ".cache/ux-toolkit/v5_6_ru.pt"))
     parser.add_argument("--model-url", default="https://models.silero.ai/models/tts/ru/v5_6_ru.pt")
     parser.add_argument("--speaker", default="baya")
+    parser.add_argument("--en-model-file", default=str(Path.home() / ".cache/ux-toolkit/v3_en.pt"))
+    parser.add_argument("--en-model-url", default="https://models.silero.ai/models/tts/en/v3_en.pt")
+    parser.add_argument("--en-speaker", default="en_99")
     parser.add_argument("--sample-rate", type=int, default=48000, choices=[8000, 24000, 48000])
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
@@ -67,6 +91,43 @@ def main() -> None:
             "Refusing to substitute a different voice — set tts.speaker explicitly."
         )
 
+    en_model = None
+
+    def get_en_model():
+        nonlocal en_model
+        if en_model is None:
+            en_model = load_model(Path(args.en_model_file), args.en_model_url, args.device)
+            if args.en_speaker not in getattr(en_model, "speakers", [args.en_speaker]):
+                fail(
+                    f"English speaker '{args.en_speaker}' not available; model offers "
+                    f"{en_model.speakers}. Set tts.en.speaker explicitly."
+                )
+        return en_model
+
+    def synth_ru(text: str):
+        return model.apply_tts(
+            text=text, put_accent=True, put_yo=True,
+            speaker=args.speaker, sample_rate=args.sample_rate,
+        )
+
+    def synth_mixed(text: str):
+        import torch
+
+        segments = split_segments(text)
+        if all(lang == "ru" for lang, _ in segments):
+            return synth_ru(text)
+        gap = torch.zeros(int(args.sample_rate * 0.08))
+        parts = []
+        for lang, chunk in segments:
+            if lang == "ru":
+                parts.append(synth_ru(chunk))
+            else:
+                parts.append(get_en_model().apply_tts(
+                    text=chunk, speaker=args.en_speaker, sample_rate=args.sample_rate,
+                ))
+            parts.append(gap)
+        return torch.cat(parts[:-1])
+
     durations = {}
     for scene in scenes:
         scene_id = scene["id"]
@@ -76,11 +137,12 @@ def main() -> None:
                 fail(f"scene {scene_id}: empty narration without intentionalSilence: true")
             durations[scene_id] = 0.0
             continue
-        kwargs = {"speaker": args.speaker, "sample_rate": args.sample_rate}
         if text.startswith("<speak>"):
-            audio = model.apply_tts(ssml_text=text, **kwargs)
+            audio = model.apply_tts(
+                ssml_text=text, speaker=args.speaker, sample_rate=args.sample_rate,
+            )
         else:
-            audio = model.apply_tts(text=text, put_accent=True, put_yo=True, **kwargs)
+            audio = synth_mixed(text)
         durations[scene_id] = round(write_wav(out_dir / f"scene-{scene_id}.wav", audio, args.sample_rate), 3)
 
     (out_dir / "durations.json").write_text(json.dumps(durations, indent=2), encoding="utf-8")

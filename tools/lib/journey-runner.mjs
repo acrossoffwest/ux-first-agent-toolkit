@@ -51,6 +51,9 @@ async function runAction(page, baseUrl, action) {
     case 'wait':
       await page.waitForTimeout(action.timeoutMs ?? 500);
       return;
+    case 'evaluate':
+      await page.evaluate(action.script);
+      return;
     default:
       throw new Error(`unknown action type "${action.type}"`);
   }

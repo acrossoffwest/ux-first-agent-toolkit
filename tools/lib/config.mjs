@@ -9,6 +9,10 @@ export const DEFAULTS = {
     modelUrl: 'https://models.silero.ai/models/tts/ru/v5_6_ru.pt',
     speaker: 'baya',
     sampleRate: 48000,
+    en: {
+      modelUrl: 'https://models.silero.ai/models/tts/en/v3_en.pt',
+      speaker: 'en_99',
+    },
   },
   video: { width: 1280, height: 720, fps: 30, subtitles: 'sidecar', polish: { enabled: false } },
   qa: {

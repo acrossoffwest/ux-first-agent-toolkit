@@ -12,7 +12,8 @@
   "properties": {
     "storyId": {
       "type": "string",
-      "pattern": "^US-\\d{3,}$"
+      "pattern": "^[A-Z0-9][A-Z0-9-]*$",
+      "description": "US-### for story videos, or an uppercase slug (e.g. TMGR-DECISIONS) for feature explainers"
     },
     "title": {
       "type": "string"
@@ -83,7 +84,8 @@
                     "expect-visible",
                     "expect-text",
                     "expect-url",
-                    "wait"
+                    "wait",
+                    "evaluate"
                   ]
                 },
                 "selector": {
@@ -110,6 +112,10 @@
                   "type": "integer",
                   "minimum": 0,
                   "description": "Typing delay for fill, for a human pace on video"
+                },
+                "script": {
+                  "type": "string",
+                  "description": "JS expression for evaluate, run in page context — e.g. to trigger a mocked backend event (window.__demo.pushCard())"
                 }
               },
               "additionalProperties": false
