@@ -18,6 +18,14 @@ import wave
 from pathlib import Path
 
 LATIN_RUN = re.compile(r"[A-Za-z][A-Za-z0-9'&+./-]*(?:\s+[A-Za-z][A-Za-z0-9'&+./-]*)*")
+ACRONYM = re.compile(r"\b[A-Z]{2,5}s?\b")
+
+
+def speakable_en(chunk: str, lexicon: dict) -> str:
+    """Audio-only rewrite of a Latin run: storyboard lexicon first, then spell acronyms."""
+    for word, spoken in lexicon.items():
+        chunk = re.sub(rf"(?<![\w-]){re.escape(word)}(?![\w-])", spoken, chunk)
+    return ACRONYM.sub(lambda m: " ".join(m.group()), chunk)
 
 
 def split_segments(text: str):
@@ -76,13 +84,14 @@ def main() -> None:
     parser.add_argument("--speaker", default="baya")
     parser.add_argument("--en-model-file", default=str(Path.home() / ".cache/ux-toolkit/v3_en.pt"))
     parser.add_argument("--en-model-url", default="https://models.silero.ai/models/tts/en/v3_en.pt")
-    parser.add_argument("--en-speaker", default="en_99")
+    parser.add_argument("--en-speaker", default="en_49")
     parser.add_argument("--sample-rate", type=int, default=48000, choices=[8000, 24000, 48000])
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
 
     storyboard = json.loads(Path(args.storyboard).read_text(encoding="utf-8"))
     scenes = storyboard.get("scenes") or fail("storyboard has no scenes")
+    lexicon = storyboard.get("pronounce") or {}
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -125,7 +134,7 @@ def main() -> None:
                 parts.append(synth_ru(chunk))
             else:
                 parts.append(get_en_model().apply_tts(
-                    text=chunk, speaker=args.en_speaker, sample_rate=args.sample_rate,
+                    text=speakable_en(chunk, lexicon), speaker=args.en_speaker, sample_rate=args.sample_rate,
                 ))
             parts.append(gap)
         return torch.cat(parts[:-1])

@@ -11,7 +11,7 @@ export const DEFAULTS = {
     sampleRate: 48000,
     en: {
       modelUrl: 'https://models.silero.ai/models/tts/en/v3_en.pt',
-      speaker: 'en_99',
+      speaker: 'en_49',
     },
   },
   video: { width: 1280, height: 720, fps: 30, subtitles: 'sidecar', polish: { enabled: false } },

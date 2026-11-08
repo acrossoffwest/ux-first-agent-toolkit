@@ -36,4 +36,11 @@ done
 jq -e '."SC-01" > 0.5 and ."SC-02" > 0.5' "$WORK/audio/durations.json" >/dev/null \
   || { echo "FAIL: durations.json invalid"; exit 1; }
 
+PYTHONPATH="$TOOLKIT_ROOT/tools/audio" "$PY" - <<'EOF'
+from synth_narration import speakable_en
+assert speakable_en("MCP server", {}) == "M C P server"
+assert speakable_en("tmgr and SSH", {"tmgr": "T M G R"}) == "T M G R and S S H"
+assert speakable_en("tmgr-ui GitHub", {"tmgr": "T M G R"}) == "tmgr-ui GitHub"
+EOF
+
 echo "PASS: synth integration"
