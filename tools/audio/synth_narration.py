@@ -31,7 +31,9 @@ def split_segments(text: str):
         pos = match.end()
     if pos < len(text):
         segments.append(("ru", text[pos:]))
-    return [(lang, chunk) for lang, chunk in segments if chunk.strip()]
+    # punctuation-only chunks (e.g. the ", " between two Latin runs) crash the
+    # TTS models — drop them; the inter-segment gap supplies the pause
+    return [(lang, chunk) for lang, chunk in segments if re.search(r"\w", chunk)]
 
 
 def fail(message: str) -> None:
