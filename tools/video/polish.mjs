@@ -66,7 +66,7 @@ export function shiftSrt(srt, offsetSec, introEntry) {
   return all.map((b, i) => `${i + 1}\n${b}`).join('\n\n') + '\n';
 }
 
-function synthPolishVoice({ outDir, intro, outro, config }) {
+function synthPolishVoice({ outDir, intro, outro, pronounce, config }) {
   const python = join(TOOLKIT_ROOT, '.venv-tts', 'bin', 'python');
   if (!existsSync(python)) throw new Error(`${python} not found — run tools/audio/setup-venv.sh first`);
   const scenes = [];
@@ -74,7 +74,7 @@ function synthPolishVoice({ outDir, intro, outro, config }) {
   if (outro) scenes.push({ id: 'OUTRO', narration: outro, actions: [] });
   const sbPath = join(outDir, 'storyboard.json');
   mkdirSync(outDir, { recursive: true });
-  writeFileSync(sbPath, JSON.stringify({ storyId: 'POLISH', scenes }, null, 2));
+  writeFileSync(sbPath, JSON.stringify({ storyId: 'POLISH', pronounce, scenes }, null, 2));
   execFileSync(
     python,
     [
@@ -121,7 +121,7 @@ if (basename(process.argv[1] ?? '') === 'polish.mjs') {
   const publicDir = join(REMOTION_DIR, 'public');
   mkdirSync(publicDir, { recursive: true });
   if (introText || outroText) {
-    const durations = synthPolishVoice({ outDir: join(out, 'polish-voice'), intro: introText, outro: outroText, config });
+    const durations = synthPolishVoice({ outDir: join(out, 'polish-voice'), intro: introText, outro: outroText, pronounce: storyboard.pronounce, config });
     if (introText) {
       introDur = durations.INTRO;
       copyFileSync(join(out, 'polish-voice', 'scene-INTRO.wav'), join(publicDir, 'intro.wav'));
