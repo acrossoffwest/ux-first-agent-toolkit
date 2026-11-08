@@ -18,14 +18,21 @@ import wave
 from pathlib import Path
 
 LATIN_RUN = re.compile(r"[A-Za-z][A-Za-z0-9'&+./-]*(?:\s+[A-Za-z][A-Za-z0-9'&+./-]*)*")
-ACRONYM = re.compile(r"\b[A-Z]{2,5}s?\b")
+ACRONYM = re.compile(r"\b[A-Z]{1,5}\b")
+LETTER_NAMES = dict(zip(
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "ay bee see dee ee ef gee aitch eye jay kay el em en oh pee cue ar ess tee you vee double-you ex why zee".split(),
+))
+# Silero v3_en garbles short isolated words; these respellings were checked with ASR.
+DEFAULT_LEXICON = {"GitHub": "git hub", "README": "reed me", "Cursor": "curser"}
 
 
 def speakable_en(chunk: str, lexicon: dict) -> str:
-    """Audio-only rewrite of a Latin run: storyboard lexicon first, then spell acronyms."""
-    for word, spoken in lexicon.items():
+    """Audio-only rewrite of a Latin run: lexicon, phonetic letter names for acronyms, final stop."""
+    for word, spoken in {**DEFAULT_LEXICON, **lexicon}.items():
         chunk = re.sub(rf"(?<![\w-]){re.escape(word)}(?![\w-])", spoken, chunk)
-    return ACRONYM.sub(lambda m: " ".join(m.group()), chunk)
+    chunk = ACRONYM.sub(lambda m: ", ".join(LETTER_NAMES[c] for c in m.group()), chunk)
+    return chunk if chunk.rstrip()[-1:] in ".!?" else chunk.rstrip() + "."
 
 
 def split_segments(text: str):

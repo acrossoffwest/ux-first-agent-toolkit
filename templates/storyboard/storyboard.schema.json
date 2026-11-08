@@ -171,7 +171,7 @@
     "pronounce": {
       "type": "object",
       "additionalProperties": { "type": "string" },
-      "description": "Audio-only spellings for Latin tokens the English voice cannot read as written, e.g. {\"tmgr\": \"T M G R\"}. Narration text and subtitles keep the original token. All-caps acronyms (MCP, SSH) are spelled letter by letter automatically."
+      "description": "Audio-only spellings for Latin tokens the English voice cannot read as written, e.g. {\"tmgr\": \"tee, em, gee, ar\"}. Narration text and subtitles keep the original token. All-caps acronyms (MCP, SSH) are spelled automatically via phonetic letter names."
     }
   },
   "additionalProperties": false
