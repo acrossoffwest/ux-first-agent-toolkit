@@ -27,6 +27,10 @@ async function runAction(page, baseUrl, action) {
       return;
     }
     case 'press':
+      if (!action.selector) {
+        await page.keyboard.press(action.key);
+        return;
+      }
       await resolveSelector(page, action.selector).press(action.key, { timeout });
       return;
     case 'hover':
