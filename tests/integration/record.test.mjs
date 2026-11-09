@@ -56,6 +56,23 @@ test('records a passing journey with video and scene timestamps', async () => {
   assert.ok(statSync(events.videoFile).size > 1000, 'video.webm is not empty');
 });
 
+test('storyboard colorScheme sets prefers-color-scheme for the page', async () => {
+  const out = mkdtempSync(join(tmpdir(), 'rec-'));
+  const darkCheck = {
+    id: 'SC-02',
+    narration: 'x',
+    minHoldSec: 0,
+    actions: [
+      {
+        type: 'evaluate',
+        script: "if (!matchMedia('(prefers-color-scheme: dark)').matches) throw new Error('not dark');",
+      },
+    ],
+  };
+  const events = await runJourney({ ...storyboard(darkCheck), colorScheme: 'dark' }, { outDir: out, video: null });
+  assert.equal(events.ok, true, events.error);
+});
+
 test('failing step marks events not ok and names the scene and action', async () => {
   const out = mkdtempSync(join(tmpdir(), 'rec-'));
   const broken = {

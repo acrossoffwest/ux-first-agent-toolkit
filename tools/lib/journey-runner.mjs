@@ -70,6 +70,7 @@ export async function runJourney(storyboard, { outDir, durations = {}, video = n
   const rawDir = join(outDir, 'raw');
   const browser = await chromium.launch({ headless });
   const contextOptions = {};
+  if (storyboard.colorScheme) contextOptions.colorScheme = storyboard.colorScheme;
   if (video) {
     mkdirSync(rawDir, { recursive: true });
     contextOptions.viewport = { width: video.width, height: video.height };
