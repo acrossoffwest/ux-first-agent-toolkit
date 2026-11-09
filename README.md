@@ -13,8 +13,9 @@ narrated video survives QA of its actual rendered soundtrack.
 ## Install
 
 ```bash
-# as a Claude Code plugin (marketplace or local)
-claude plugin install /path/to/ux-first-agent-toolkit
+# as a Claude Code plugin: add the marketplace (GitHub repo or local path), then install
+claude plugin marketplace add acrossoffwest/ux-first-agent-toolkit   # or /path/to/ux-first-agent-toolkit
+claude plugin install ux-first-agent-toolkit@ux-first
 
 # toolkit runtime deps (for journey tests and video)
 npm install

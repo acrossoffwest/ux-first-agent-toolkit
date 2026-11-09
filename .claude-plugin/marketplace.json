@@ -1,0 +1,13 @@
+{
+  "name": "ux-first",
+  "owner": {
+    "name": "acrossoffwest"
+  },
+  "plugins": [
+    {
+      "name": "ux-first-agent-toolkit",
+      "source": "./",
+      "description": "UX-first development lifecycle: product intent, feature maps, user stories, flows, mockups, UX critique, Playwright journeys and narrated walkthrough videos."
+    }
+  ]
+}
