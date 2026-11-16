@@ -121,3 +121,6 @@ MIT. Ideas adapted (with attribution, no code copied) from
 [ux-skills](https://github.com/Tranz007/ux-skills) (MIT),
 [pm-skills](https://github.com/product-on-purpose/pm-skills) (Apache 2.0),
 [ux-ui-agent-skills](https://github.com/plugin87/ux-ui-agent-skills) (MIT).
+
+The Silero TTS model is not part of this repo: it is downloaded at runtime and
+used under its own license (CC-BY-NC), which each user has to follow.
